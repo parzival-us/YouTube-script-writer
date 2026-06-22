@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate polished YouTube scripts, titles, and thumbnail ideas in seconds.">
+  <title>ScriptForge AI — YouTube Script Writer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%238b5cf6'/%3E%3Cpath d='M12 9v14l11-7-11-7Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="ScriptForge AI home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5L8 5.5Z" fill="currentColor"/></svg>
+      </span>
+      <span>ScriptForge <em>AI</em></span>
+    </a>
+    <div class="topbar-actions">
+      <span class="status"><i></i> AI Studio online</span>
+      <a class="github-link" href="/docs" target="_blank" rel="noreferrer">API Docs</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="control-panel">
+      <div class="eyebrow"><span></span> CREATIVE STUDIO</div>
+      <h1>Turn an idea into a <span>video worth watching.</span></h1>
+      <p class="subhead">Build a structured YouTube script, click-worthy titles, and thumbnail copy in one focused flow.</p>
+
+      <form id="generator-form" novalidate>
+        <div class="field-group">
+          <div class="label-row">
+            <label for="topic">What’s your video about?</label>
+            <span id="topic-count">0 / 180</span>
+          </div>
+          <div class="textarea-wrap">
+            <textarea id="topic" name="topic" maxlength="180" rows="4" placeholder="e.g. How small habits compound into big results" required></textarea>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15.5 5.5 3 3M4 20l3.6-.7L18.9 8a1.4 1.4 0 0 0 0-2l-.9-.9a1.4 1.4 0 0 0-2 0L4.7 16.4 4 20Z"/></svg>
+          </div>
+          <p class="field-error" id="topic-error"></p>
+        </div>
+
+        <div class="field-group">
+          <label for="style">Video style</label>
+          <div class="select-wrap">
+            <select id="style" name="style">
+              <option value="Educational">Educational</option>
+              <option value="Storytelling">Storytelling</option>
+              <option value="Documentary">Documentary</option>
+              <option value="Motivational">Motivational</option>
+              <option value="Listicle">Listicle</option>
+              <option value="Conversational">Conversational</option>
+            </select>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+          </div>
+        </div>
+
+        <fieldset class="field-group">
+          <legend>Script length</legend>
+          <div class="length-options">
+            <label class="length-option">
+              <input type="radio" name="length" value="Short">
+              <span><strong>Short</strong><small>2–3 min</small></span>
+            </label>
+            <label class="length-option selected">
+              <input type="radio" name="length" value="Medium" checked>
+              <span><strong>Medium</strong><small>4–6 min</small></span>
+            </label>
+            <label class="length-option">
+              <input type="radio" name="length" value="Long">
+              <span><strong>Long</strong><small>7–9 min</small></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <button class="generate-button" id="generate-button" type="submit">
+          <span class="button-content">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.35 4.15L17.5 8.5l-4.15 1.35L12 14l-1.35-4.15L6.5 8.5l4.15-1.35L12 3Zm6 11 .82 2.18L21 17l-2.18.82L18 20l-.82-2.18L15 17l2.18-.82L18 14Z"/></svg>
+            Generate my script
+          </span>
+          <span class="button-loading"><i></i> Crafting your story…</span>
+        </button>
+      </form>
+
+      <section class="history-section" aria-labelledby="history-title">
+        <div class="history-header">
+          <h2 id="history-title">Recent creations</h2>
+          <button class="text-button" id="refresh-history" type="button">Refresh</button>
+        </div>
+        <div id="history-list" class="history-list"><p class="empty-history">Your saved scripts will appear here.</p></div>
+      </section>
+    </aside>
+
+    <section class="result-panel" id="result-panel" aria-live="polite">
+      <div class="empty-state" id="empty-state">
+        <div class="orbital-art" aria-hidden="true">
+          <div class="orbit orbit-one"><i></i></div>
+          <div class="orbit orbit-two"><i></i></div>
+          <div class="art-core">
+            <svg viewBox="0 0 24 24"><path d="M6 4.5h8l4 4V20H6V4.5Z"/><path d="M14 4.5V9h4M9 13h6M9 16h4"/></svg>
+          </div>
+        </div>
+        <div class="eyebrow"><span></span> YOUR NEXT STORY STARTS HERE</div>
+        <h2>Ready when you are.</h2>
+        <p>Give us a topic and a creative direction. Your complete video blueprint will appear right here.</p>
+        <div class="feature-pills">
+          <span><i>✦</i> Structured script</span>
+          <span><i>✦</i> Viral title ideas</span>
+          <span><i>✦</i> Thumbnail copy</span>
+        </div>
+      </div>
+
+      <div class="loading-state" id="loading-state" hidden>
+        <div class="loading-mark"><span></span><span></span><span></span></div>
+        <h2>Shaping your story</h2>
+        <p id="loading-message">Finding the strongest angle…</p>
+        <div class="skeleton-card">
+          <i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <article class="script-result" id="script-result" hidden>
+        <div class="result-header">
+          <div>
+            <div class="eyebrow"><span></span> SCRIPT COMPLETE</div>
+            <h2 id="result-topic"></h2>
+            <div class="script-meta">
+              <span id="result-style"></span><i></i><span id="result-length"></span><i></i><span id="result-words"></span><i></i><span id="result-runtime"></span>
+            </div>
+          </div>
+          <div class="result-actions">
+            <button type="button" class="action-button primary" id="copy-button" title="Copy full script">
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+              <span>Copy script</span>
+            </button>
+            <div class="download-menu-wrap">
+              <button type="button" class="action-button" id="download-button" aria-expanded="false">
+                <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
+                Download
+              </button>
+              <div class="download-menu" id="download-menu" hidden>
+                <a id="download-txt" href="#"><strong>TXT</strong><span>Plain text document</span></a>
+                <a id="download-pdf" href="#"><strong>PDF</strong><span>Formatted document</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="script-layout">
+          <div class="script-sections">
+            <section class="content-card accent-card">
+              <div class="card-label"><span class="card-icon">01</span><h3>Hook</h3></div>
+              <p id="result-hook"></p>
+            </section>
+            <section class="content-card">
+              <div class="card-label"><span class="card-icon">02</span><h3>Introduction</h3></div>
+              <p id="result-introduction"></p>
+            </section>
+            <section class="content-card">
+              <div class="card-label"><span class="card-icon">03</span><h3>Main content</h3></div>
+              <div id="result-main" class="main-copy"></div>
+            </section>
+            <section class="content-card">
+              <div class="card-label"><span class="card-icon">04</span><h3>Call to action</h3></div>
+              <p id="result-cta"></p>
+            </section>
+          </div>
+
+          <aside class="ideas-column">
+            <section class="ideas-card">
+              <div class="ideas-heading"><span>✦</span><h3>YouTube titles</h3></div>
+              <ol id="result-titles"></ol>
+            </section>
+            <section class="ideas-card thumbnail-card">
+              <div class="ideas-heading"><span>◫</span><h3>Thumbnail text</h3></div>
+              <div id="result-thumbnails" class="thumbnail-list"></div>
+            </section>
+          </aside>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span>✓</span><p></p></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+"""ScriptForge AI application package."""
+
