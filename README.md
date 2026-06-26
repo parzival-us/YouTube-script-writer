@@ -98,9 +98,3 @@ data/
 You can customize the application by setting environment variables. 
 
 - `SCRIPT_WRITER_DB_PATH`: Set this to use a custom SQLite file location instead of the default `data/scripts.db`.
-
----
-
-<div align="center">
-  <i>Built with ❤️ for YouTube creators.</i>
-</div>
